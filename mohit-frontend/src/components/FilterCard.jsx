@@ -9,7 +9,7 @@ function FilterCard({ onFilterChange }) {
   const handleChange = (e) => {
     const newFilters = { ...filters, [e.target.name]: e.target.value };
     setFilters(newFilters);
-    onFilterChange(newFilters); // instantly updates
+    onFilterChange(newFilters);
   };
 
   return (

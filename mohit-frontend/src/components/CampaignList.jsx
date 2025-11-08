@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Bookmark, Clock } from "lucide-react";
 import { Button } from "./ui/button";
-import FilterCard from "./FilterCard"; // ✅ Import FilterCard
+import FilterCard from "./FilterCard";
 
 // const campaignsData = [
 //   {

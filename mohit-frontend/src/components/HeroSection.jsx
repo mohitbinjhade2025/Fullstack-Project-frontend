@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 
 function HeroSection() {
   return (
@@ -30,7 +31,7 @@ function HeroSection() {
           className="border-0 focus:ring-0 focus:outline-none w-full"
         />
         <Button className="bg-green-700 hover:bg-green-800 rounded-full px-6">
-          Search
+          <Link to="/campaign">Search</Link>
         </Button>
       </div>
     </section>

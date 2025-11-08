@@ -122,7 +122,7 @@ function About() {
           creativity.
         </p>
         <button className="bg-white text-green-700 font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition">
-          <Link to="/upload">Start a Campaign</Link>
+          <Link to="/createcampaign">Start a Campaign</Link>
         </button>
       </section>
     </div>

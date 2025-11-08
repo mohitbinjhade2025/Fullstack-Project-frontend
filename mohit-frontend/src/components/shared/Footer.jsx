@@ -10,6 +10,7 @@
 
 import React from "react";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -55,12 +56,13 @@ function Footer() {
         {/* Categories */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">Popular Categories</h3>
+          
           <ul className="space-y-2 text-sm">
-            <li>Science & AI</li>
-            <li>Technology</li>
-            <li>Education</li>
-            <li>Health & Wellness</li>
-            <li>Environment</li>
+            <li><Link to="campaign">Science & AI </Link></li>
+            <li><Link to="campaign">Technology</Link></li>
+            <li><Link to="campaign">Education</Link></li>
+            <li><Link to="campaign">Health & Wellness</Link></li>
+            <li><Link to="campaign">Environment</Link></li>
           </ul>
         </div>
 
