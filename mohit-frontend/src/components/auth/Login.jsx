@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setLoading, setUser } from '@/redux/authSlice'
 import { Loader2 } from 'lucide-react'
 
+
 function Login() {
     // const naviagte = useNavigate();
     const [input, setInput] = useState({
@@ -45,7 +46,7 @@ function Login() {
             }
         }catch(error){
             console.log(error)
-            toast.error(error.response.data.message);
+            // toast.error(error.response.data.message);
         }finally{
             dispatch(setLoading(false));
             // const [loading, setLoading] = useState(false);

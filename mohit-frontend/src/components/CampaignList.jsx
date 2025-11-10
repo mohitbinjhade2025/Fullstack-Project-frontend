@@ -1,82 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Bookmark, Clock } from "lucide-react";
 import { Button } from "./ui/button";
 import FilterCard from "./FilterCard";
+import axios from "axios";
+import defaultImage from "../assets/image.jpg";
 
-// const campaignsData = [
-//   {
-//     id: 1,
-//     title: "AI-Powered Research Assistant",
-//     creator: "NeuroTech Labs",
-//     category: "Science & AI",
-//     image: "https://images.unsplash.com/photo-1581090700227-1e37b190418e",
-//     goal: 25000,
-//     raised: 18700,
-//     daysLeft: 12,
-//     description:
-//       "An intelligent research companion that automates data analysis and literature reviews for scientists and students alike.",
-//   },
-//   {
-//     id: 2,
-//     title: "Next-Gen Solar Charging Tech",
-//     creator: "EcoCharge",
-//     category: "Technology",
-//     image: "https://images.unsplash.com/photo-1581093588401-22b4acb8d8a1",
-//     goal: 40000,
-//     raised: 31200,
-//     daysLeft: 25,
-//     description:
-//       "Portable solar technology delivering faster and cleaner energy for all your devices anywhere under the sun.",
-//   },
-//   {
-//     id: 3,
-//     title: "Smart Learning App for Kids",
-//     creator: "EduSpark",
-//     category: "Education",
-//     image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e",
-//     goal: 20000,
-//     raised: 15800,
-//     daysLeft: 10,
-//     description:
-//       "Interactive app using AI and gamification to make learning fun, personalized, and engaging for young learners.",
-//   },
-//   {
-//     id: 4,
-//     title: "Mental Wellness AI Tracker",
-//     creator: "MindWell Co.",
-//     category: "Health & Wellness",
-//     image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15",
-//     goal: 30000,
-//     raised: 27500,
-//     daysLeft: 5,
-//     description:
-//       "An AI-driven mood tracker promoting mental well-being through guided journaling and mindfulness insights.",
-//   },
-//   {
-//     id: 5,
-//     title: "Clean Water from Air Project",
-//     creator: "AquaGreen",
-//     category: "Environment",
-//     image: "https://images.unsplash.com/photo-1523978591478-c753949ff840",
-//     goal: 50000,
-//     raised: 42600,
-//     daysLeft: 7,
-//     description:
-//       "Innovative technology that extracts pure drinking water directly from humid air, tackling global water scarcity.",
-//   },
-//   {
-//     id: 6,
-//     title: "AI-Based Waste Sorting System",
-//     creator: "SmartSort AI",
-//     category: "Science & AI",
-//     image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
-//     goal: 35000,
-//     raised: 28000,
-//     daysLeft: 15,
-//     description:
-//       "A smart waste management system that uses AI and sensors to identify, sort, and recycle materials efficiently.",
-//   },
-// ];
+
+
+
 const campaignsData = [
   {
     id: 1,
@@ -196,17 +127,37 @@ const campaignsData = [
 
 
 function CampaignList() {
+
+  const [campaigns, setCampaigns] = useState([]);
+
+
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      try {
+        const res = await axios.get("http://localhost:8000/api/v1/campaign/get", {
+          withCredentials: true,
+        });
+        console.log("Campaigns fetched:", res.data);
+        console.log(" Campaigns fetched:", res.data.campaigns);
+        setCampaigns(res.data.campaigns || []);
+      } catch (err) {
+        console.error("Error fetching campaigns:", err);
+      }
+    };
+
+    fetchCampaigns(); 
+  }, []);
+
+
   const [filters, setFilters] = useState({
     category: "All",
     search: "",
   });
 
-  // ✅ Function to update filters from FilterCard
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
   };
 
-  // ✅ Filter logic
   const filteredCampaigns = campaignsData.filter((c) => {
     const matchCategory =
       filters.category === "All" || c.category === filters.category;
@@ -219,17 +170,15 @@ function CampaignList() {
   return (
     <div className="w-full px-8 py-12 bg-gray-50 min-h-screen">
       <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">
-        Explore Top Campaigns 🚀
+        Explore Top Campaigns 
       </h2>
 
-      {/* ✅ Filter Section */}
       <div className="flex justify-center mb-10">
         <div className="w-full max-w-3xl">
           <FilterCard onFilterChange={handleFilterChange} />
         </div>
       </div>
 
-      {/* ✅ GRID Layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
         {filteredCampaigns.map((campaign) => {
           const fundedPercent = Math.round(
@@ -238,14 +187,11 @@ function CampaignList() {
 
           return (
             <div
-              key={campaign.id}
+              key={campaign._id}
               className="relative w-[330px] bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group cursor-pointer transform hover:-translate-y-2 h-[460px] flex flex-col justify-between"
             >
-              {/* Image */}
               <div className="relative overflow-hidden">
-                <img
-                  src={campaign.image}
-                  alt={campaign.title}
+                <img src={ campaign.image || defaultImage } alt={campaign.title}
                   className="h-48 w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
                 <Button
@@ -257,43 +203,49 @@ function CampaignList() {
                 </Button>
               </div>
 
-              {/* Progress Bar */}
               <div className="h-1.5 bg-gray-200">
                 <div
                   className="h-1.5 bg-green-600 rounded-r-full transition-all duration-700 ease-in-out"
-                  style={{ width: `${fundedPercent}%` }}
+                  style={{
+                    width: `${Math.min(
+                      Math.round((campaign.collectedFund / campaign.targetFund) * 100),
+                      100
+                    )}%`,
+                  }}
                 ></div>
               </div>
-
-              {/* Info */}
               <div className="p-5 relative flex-grow">
                 <p className="text-xs text-green-700 font-semibold mb-1 uppercase">
-                  {campaign.category}
+                  {campaign.category || "General"}
                 </p>
+
                 <h3 className="text-lg font-bold text-gray-900 leading-tight">
                   {campaign.title}
                 </h3>
+
                 <p className="text-sm text-gray-600 mb-2">
-                  By {campaign.creator}
+                  By {campaign.organizer || "Unknown Organizer"}
                 </p>
+
                 <p className="text-sm text-gray-700 line-clamp-2">
                   {campaign.description}
                 </p>
-
-                {/* Hover Reveal */}
                 <div className="absolute inset-0 bg-white/95 p-5 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 rounded-xl flex flex-col justify-center">
                   <p className="text-sm text-gray-800 mb-1">
-                    <strong>Goal:</strong> ${campaign.goal.toLocaleString()}
+                    <strong>Goal:</strong> ${campaign.goalAmount}
                   </p>
+
+                  {/* <p className="text-sm text-gray-800 mb-1">
+                    <strong>Raised:</strong> ${campaign.collectedFund.toLocaleString()}
+                  </p> */}
+
                   <p className="text-sm text-gray-800 mb-1">
-                    <strong>Raised:</strong> ${campaign.raised.toLocaleString()}
+                    <strong>Status:</strong> {campaign.status}
                   </p>
-                  <p className="text-sm text-gray-800 mb-1">
-                    <strong>Funding:</strong> {fundedPercent}%
-                  </p>
+
                   <p className="text-sm text-gray-800 flex items-center gap-3">
                     <Clock className="h-4 w-4 text-gray-600" />
-                    {campaign.daysLeft} days left
+                    {new Date(campaign.createdAt).toLocaleDateString()}
                   </p>
 
                   <div className="flex justify-center mt-4 gap-3">
@@ -310,6 +262,7 @@ function CampaignList() {
                 </div>
               </div>
             </div>
+
           );
         })}
 

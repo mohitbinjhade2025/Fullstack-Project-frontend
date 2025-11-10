@@ -12,12 +12,15 @@ import { USER_API_END_POINT } from '../constant'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoading } from '@/redux/authSlice'
 import { Loader2 } from 'lucide-react'
+import { UserContext } from '../shared/UserContext'
+import { useContext } from 'react'
 
 
 
 
 function Signup() {
 
+    const { setUser } = useContext(UserContext)
     const [input, setInput] = useState({
         fullname: "",
         email: "",
@@ -26,7 +29,7 @@ function Signup() {
         role: "",
         file: ""
     });
-    const {loading} = useSelector(store=>store.auth);
+    const { loading } = useSelector(store => store.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -55,17 +58,24 @@ function Signup() {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
-                withCredentials: true, // ✅ only if backend allows cookies
+                withCredentials: true, 
             });
 
+
+
             if (res.data.success) {
+                setUser({
+                    name: input.fullname,
+                    email: input.email,
+                    phone: input.phoneNumber
+                });
                 toast.success(res.data.message);
                 navigate("/login");
             }
         } catch (error) {
             console.log("Signup Error:", error);
             toast.error(error.response?.data?.message || "Signup failed");
-        }finally{
+        } finally {
             dispatch(setLoading(false))
         }
 
@@ -163,7 +173,7 @@ function Signup() {
                     </div>
                     {/* <Button type='submit' className="w-full my-4">SignUp</Button> */}
                     {
-                        loading ? <Button className="w-full my-4"> <Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait</Button>: <Button type='submit' className="w-full my-4">Signup</Button> 
+                        loading ? <Button className="w-full my-4"> <Loader2 className="mr-2 h-4 w-4 animate-spin" />Please wait</Button> : <Button type='submit' className="w-full my-4">Signup</Button>
                     }
                     <span className="text-sm">Already have an account? <Link to="/login" className="hover:text-[#096e07] cursor-pointer">Login</Link></span>
                 </form>

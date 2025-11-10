@@ -5,8 +5,13 @@ import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Edit, Mail, Phone, Heart, Folder } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "./shared/UserContext";
 
 const UserProfile = () => {
+
+  const {user: userContext } = useContext(UserContext);
+
   const user = {
     name: "Mohit Binjhade",
     email: "mohitbinjhade9@gmail.com",
@@ -23,7 +28,6 @@ const UserProfile = () => {
       <Navbar />
 
       <div className="max-w-5xl mx-auto mt-10 bg-white shadow-md rounded-2xl p-8">
-        {/* Profile Header */}
         <div className="flex flex-col md:flex-row items-center justify-between border-b pb-6">
           <div className="flex items-center gap-6">
             <Avatar className="h-24 w-24">
@@ -31,15 +35,15 @@ const UserProfile = () => {
             </Avatar>
             <div>
               <h1 className="text-2xl font-semibold text-gray-800">
-                {user.name}
+                {userContext.name}
               </h1>
               <p className="text-gray-600">{user.bio}</p>
               <div className="mt-3 space-y-1">
                 <p className="flex items-center gap-2 text-gray-700">
-                  <Mail size={18} /> {user.email}
+                  <Mail size={18} /> {userContext.email}
                 </p>
                 <p className="flex items-center gap-2 text-gray-700">
-                  <Phone size={18} /> {user.phone}
+                  <Phone size={18} /> {userContext.phone}
                 </p>
               </div>
             </div>
@@ -49,7 +53,6 @@ const UserProfile = () => {
           </Button>
         </div>
 
-        {/* User Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
           <div className="p-6 bg-blue-50 rounded-xl flex flex-col items-center shadow-sm">
             <Heart className="text-blue-600 mb-2" size={28} />
@@ -63,7 +66,6 @@ const UserProfile = () => {
           </div>
         </div>
 
-        {/* Campaign History */}
         <div className="mt-10">
           <h2 className="text-xl font-semibold mb-4 border-b pb-2">My Campaigns</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

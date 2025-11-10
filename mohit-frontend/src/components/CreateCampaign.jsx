@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const CreateCampaign = () => {
   const [form, setForm] = useState({
@@ -25,9 +26,22 @@ const CreateCampaign = () => {
     setForm({ ...form, image: e.target.files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log("Campaign Submitted:", form);
+
+    try {
+      const res = await axios.post(`http://localhost:8000/api/v1/campaign/register`, form, {
+                // headers: {
+                //     "Content-Type": "multipart/form-data",
+                // },
+                withCredentials: true, 
+            });
+            
+    } catch(err)  {
+      console.log(err)
+    }
+
     alert("Campaign submitted successfully!");
   };
 
@@ -40,7 +54,7 @@ const CreateCampaign = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Campaign Title */}
+
           <div>
             <Label htmlFor="title" className="text-gray-700 font-medium">
               Campaign Title
@@ -57,7 +71,6 @@ const CreateCampaign = () => {
             />
           </div>
 
-          {/* Description */}
           <div>
             <Label htmlFor="description" className="text-gray-700 font-medium">
               Description
@@ -73,7 +86,6 @@ const CreateCampaign = () => {
             />
           </div>
 
-          {/* Goal Amount */}
           <div>
             <Label htmlFor="goalAmount" className="text-gray-700 font-medium">
               Goal Amount (₹)
@@ -90,7 +102,7 @@ const CreateCampaign = () => {
             />
           </div>
 
-          {/* Category */}
+
           <div>
             <Label htmlFor="category" className="text-gray-700 font-medium">
               Category
@@ -112,11 +124,8 @@ const CreateCampaign = () => {
             </select>
           </div>
 
-          {/* Deadline */}
           <div>
-            <Label htmlFor="deadline" className="text-gray-700 font-medium">
-              Deadline
-            </Label>
+            <Label htmlFor="deadline" className="text-gray-700 font-medium"> Deadline</Label>
             <Input
               id="deadline"
               name="deadline"
@@ -128,11 +137,8 @@ const CreateCampaign = () => {
             />
           </div>
 
-          {/* Image Upload */}
           <div>
-            <Label htmlFor="image" className="text-gray-700 font-medium">
-              Upload Campaign Image
-            </Label>
+            <Label htmlFor="image" className="text-gray-700 font-medium">Upload Campaign Image</Label>
             <Input
               id="image"
               name="image"
@@ -150,7 +156,6 @@ const CreateCampaign = () => {
             )}
           </div>
 
-          {/* Submit Button */}
           <div className="text-center mt-6">
             <Button type="submit" className="w-full py-3 text-lg">
               <Link to="/Campaign">Create Campaign</Link>

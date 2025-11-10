@@ -6,11 +6,9 @@ function About() {
   return (
     <div className="bg-gray-50 min-h-screen text-gray-800">
       <Navbar />
-
-      {/* Hero Section */}
       <section className="max-w-6xl mx-auto text-center py-16 px-6">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          Empowering Ideas, Connecting Dreamers 💡
+          Empowering Ideas, Connecting Dreamers
         </h1>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
           CraftLift is a community-driven crowdfunding platform that helps
@@ -20,7 +18,6 @@ function About() {
         </p>
       </section>
 
-      {/* Mission Section */}
       <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -32,7 +29,7 @@ function About() {
           </div>
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Our Mission 🚀
+              Our Mission
             </h2>
             <p className="text-gray-700 leading-relaxed">
               We believe that every great idea deserves a chance. Our mission is
@@ -44,12 +41,11 @@ function About() {
         </div>
       </section>
 
-      {/* Vision Section */}
       <section className="bg-green-50 py-16">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Our Vision 🌍
+              Our Vision
             </h2>
             <p className="text-gray-700 leading-relaxed">
               To create a world where creativity and innovation have no
@@ -68,11 +64,10 @@ function About() {
         </div>
       </section>
 
-      {/* Team Section */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto text-center px-6">
           <h2 className="text-3xl font-bold text-gray-900 mb-10">
-            Meet Our Team 👥
+            Meet Our Team
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
@@ -112,7 +107,6 @@ function About() {
         </div>
       </section>
 
-      {/* Footer CTA */}
       <section className="bg-green-600 py-14 text-center text-white">
         <h2 className="text-3xl font-semibold mb-3">
           Ready to bring your idea to life?

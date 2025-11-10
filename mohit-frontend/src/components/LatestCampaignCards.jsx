@@ -1,138 +1,3 @@
-// // import React from 'react'
-
-// // function LatestCampaignCards() {
-// //   return (
-// //     <div>LatestCampaignCards</div>
-// //   )
-// // }
-
-// // export default LatestCampaignCards
-
-// import React from "react";
-// import { Button } from "@/components/ui/button";
-
-// function LatestCampaignCards() {
-//   const campaigns = [
-//     {
-//       id: 1,
-//       title: "Help Build a Village School",
-//       creator: "Aarav Sharma",
-//       description: "Raising funds to construct a school for underprivileged children.",
-//       image: "https://images.unsplash.com/photo-1600172454284-b74b6a9e1a2b",
-//       raised: 4200,
-//       goal: 100000,
-//     },
-//     {
-//       id: 2,
-//       title: "Support Local Farmers",
-//       creator: "GreenGrow Initiative",
-//       description: "Helping small farmers access organic fertilizers and irrigation tools.",
-//       image: "https://images.unsplash.com/photo-1594183610500-3b4b7a9d08c7",
-//       raised: 2500,
-//       goal: 80000,
-//     },
-//     {
-//       id: 3,
-//       title: "AI-Powered Health Diagnostics",
-//       creator: "NeuraHealth Labs",
-//       description:
-//         "Developing an AI tool that can predict early signs of diseases using medical imaging.",
-//       image: "https://images.unsplash.com/photo-1581091215367-59ab6c0a0b1d",
-//       raised: 7500,
-//       goal: 150000,
-//     },
-//     {
-//       id: 5,
-//       title: "Climate Data Intelligence",
-//       creator: "EcoAI Research",
-//       description:
-//         "Using AI models to forecast and mitigate climate risks in rural India.",
-//       image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620",
-//       raised: 9200,
-//       goal: 180000,
-//     },
-//     {
-//       id: 5,
-//       title: "Tech for Rural Students",
-//       creator: "EduTech Foundation",
-//       description: "Supplying used laptops and digital learning tools for students.",
-//       image: "https://images.unsplash.com/photo-1509062522246-3755977927d7",
-//       raised: 3000,
-//       goal: 90000,
-//     },
-//     {
-//       id: 6,
-//       title: "Save The Stray Animals",
-//       creator: "Paws & Care",
-//       description: "Funding for shelter, vaccination, and food for stray animals.",
-//       image: "https://images.unsplash.com/photo-1601758124095-0c5b9da9aa1d",
-//       raised: 4800,
-//       goal: 100000,
-//     },
-//   ];
-
-//   return (
-//     <section className="bg-gray-50 py-16">
-//       <div className="max-w-7xl mx-auto px-6">
-//         <h2 className="text-3xl font-bold text-center mb-10">
-//           🌟 Latest & Top Fundraising Campaigns
-//         </h2>
-
-//         {/* Campaign Grid */}
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-//           {campaigns.map((item) => (
-//             <div
-//               key={item.id}
-//               className="bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden"
-//             >
-//               {/* Image */}
-//               <img
-//                 src={item.image}
-//                 alt={item.title}
-//                 className="w-full h-48 object-cover"
-//               />
-
-//               {/* Content */}
-//               <div className="p-5 text-left">
-//                 <h3 className="text-lg font-semibold text-gray-800">
-//                   {item.title}
-//                 </h3>
-//                 <p className="text-sm text-gray-500 mb-3">By {item.creator}</p>
-//                 <p className="text-gray-600 text-sm mb-4">
-//                   {item.description.length > 80
-//                     ? item.description.slice(0, 80) + "..."
-//                     : item.description}
-//                 </p>
-
-//                 {/* Progress Bar */}
-//                 <div className="w-full bg-gray-200 rounded-full h-2.5 mb-3">
-//                   <div
-//                     className="bg-green-600 h-2.5 rounded-full"
-//                     style={{
-//                       width: `${(item.raised / item.goal) * 100}%`,
-//                     }}
-//                   ></div>
-//                 </div>
-//                 <p className="text-sm text-gray-600 mb-4">
-//                   ₹{item.raised.toLocaleString()} raised of ₹
-//                   {item.goal.toLocaleString()}
-//                 </p>
-
-//                 <Button className="w-full bg-green-600 hover:bg-green-700">
-//                   View Campaign
-//                 </Button>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-// export default LatestCampaignCards;
-
-
 import React from "react";
 import { Clock } from "lucide-react";
 
@@ -241,7 +106,7 @@ const LatestCampaignCards = () => {
     <section className="bg-gray-50 py-16 px-6">
       <div className="max-w-7xl mx-auto text-center mb-10">
         <h2 className="text-3xl font-bold text-gray-800">
-          🌟 Latest & Top Fundraising Campaigns
+           Latest & Top Fundraising Campaigns
         </h2>
         <p className="text-gray-500 mt-2">
           Explore trending campaigns making a real-world impact.
@@ -275,13 +140,13 @@ const LatestCampaignCards = () => {
               </div>
 
               <div className="text-sm text-gray-600">
-                🎯 <span className="font-medium">Goal:</span> {item.goal}
+                 <span className="font-medium">Goal:</span> {item.goal}
               </div>
               <div className="text-sm text-gray-600">
-                💰 <span className="font-medium">Raised:</span> {item.raised}
+                 <span className="font-medium">Raised:</span> {item.raised}
               </div>
               <div className="text-sm text-gray-600">
-                🧠 <span className="font-medium">Tech Used:</span> {item.tech}
+                 <span className="font-medium">Tech Used:</span> {item.tech}
               </div>
             </div>
           </div>

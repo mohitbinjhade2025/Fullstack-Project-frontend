@@ -1,4 +1,3 @@
-
 // export default Home
 import React from 'react'
 import Navbar from './shared/Navbar'
